@@ -44,6 +44,7 @@ public class Bank {
 	}
 
 	private void createAccount() {
+		if(isLoggedIn()) {}
 	}
 
 	private void deleteAccount() {
