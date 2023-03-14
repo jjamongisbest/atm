@@ -12,4 +12,10 @@ public class AccountManager {
 	// R ead
 	// U pdate
 	// D elete
+	
+	public static void createAccount() {
+		
+	}
+	
+	public static void deleteAccount() {}
 }
