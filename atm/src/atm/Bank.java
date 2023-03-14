@@ -34,12 +34,16 @@ public class Bank {
 
 	private void printMenu() {
 		System.out.println("[" + this.name + " ATM]");
+		if(isLoggedIn()) {
+			System.out.printf("[환영합니다 %s님!]\n",um.getList().get(this.log).getName());
+		}
 		System.out.println("[1] 로그인");
 		System.out.println("[2] 회원가입");
 		System.out.println("[3] 회원탈퇴");
 		System.out.println("[4] 계좌신청");
 		System.out.println("[5] 계좌철회");
 		System.out.println("[0] 로그아웃");
+		System.out.print("[메뉴선택] : ");
 
 	}
 
@@ -93,7 +97,7 @@ public class Bank {
 		ArrayList<Account> list = am.getList();
 		for (int i = 0; i < list.size(); i++)
 			if (list.get(i).getId().equals(id))
-				System.out.printf("[%d] %d\n", index++, list.get(i).getAccountNumber());
+				System.out.printf("[%d] %s\n", index++, list.get(i).getAccountNumber());
 	}
 
 	private void deleteAccount() {
@@ -148,6 +152,7 @@ public class Bank {
 			if (!checkDuplId(id)) {
 				User user = new User(id, password, name);
 				um.addUser(user);
+				System.out.println("[메세지] 회원가입을 축하합니다!");				
 			} else
 				System.out.println("[메세지] 유효하지 않거나 이미 가입된 아이디 입니다.");
 		} else
@@ -187,7 +192,11 @@ public class Bank {
 
 		} else
 			System.out.println("[메세지] 존재하지 않는 아이디 입니다.");
-
+	}
+	
+	private void logOut() {
+		this.log = -1;
+		System.out.println("[메세지] 로그아웃이 완료되었습니다.BYE.");
 	}
 
 	private void mainMenu() {
@@ -205,8 +214,8 @@ public class Bank {
 			createAccount();
 		else if (sel == 5)
 			deleteAccount();
-//		else if(sel == 0)
-//			logOut();
+		else if(sel == 0)
+			logOut();
 	}
 
 }
