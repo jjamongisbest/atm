@@ -28,7 +28,7 @@ public class UserManager {
 	}
 
 	public User getUser(String id) {
-		int index = -1; // 호출되는 메서드 존재 추가해야됨
+		int index = -1; 
 		
 		for (int i = 0; i < getList().size(); i++)
 			if (getList().get(i).getId().equals(id))
@@ -59,4 +59,5 @@ public class UserManager {
 	public ArrayList<User> getList() {
 		return list;
 	}
+
 }

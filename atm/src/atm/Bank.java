@@ -1,6 +1,7 @@
 package atm;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Bank {
@@ -26,16 +27,10 @@ public class Bank {
 		mainMenu();
 	}
 
-	// ATM 프로젝트
-	//
-	// - 회원가입 / 탈퇴
-	// - 계좌신청 / 철회 (1인 3계좌 까지)
-	// - 로그인
-
 	private void printMenu() {
 		System.out.println("[" + this.name + " ATM]");
-		if(isLoggedIn()) {
-			System.out.printf("[환영합니다 %s님!]\n",um.getList().get(this.log).getName());
+		if (isLoggedIn()) {
+			System.out.printf("[환영합니다 %s님!]\n", um.getList().get(this.log).getName());
 		}
 		System.out.println("[1] 로그인");
 		System.out.println("[2] 회원가입");
@@ -70,10 +65,20 @@ public class Bank {
 		return true;
 	}
 
+	private String setAccount() {
+		Random ran = new Random();
+
+		int r = ran.nextInt(8999) + 1000;
+		int n = ran.nextInt(8999) + 1000;
+
+		String data = r + "-" + n;
+		
+		return data;
+	}
+
 	private void createAccount() {
 		if (isLoggedIn()) {
-			System.out.print("[계좌생성] ACCOUNT : ");
-			String accountNumber = sc.next();
+			String accountNumber =  setAccount();
 
 			if (checkDuplAccount(accountNumber)) {
 				ArrayList<User> userList = um.getList();
@@ -82,7 +87,9 @@ public class Bank {
 					int money = 0;
 					Account acc = new Account(id, accountNumber, money);
 					am.createAccount(acc);
-					acc.setAccountCount(acc.getAccountCount() + 1);
+					acc.setAccountSize(acc.getAccountSize() + 1);
+					um.getList().get(this.log).setAcc(am.getList());;
+					System.out.println("[계좌생성] 계좌생성을 완료하였습니다.");
 				} else
 					System.out.println("[메세지] 계좌 생성 제한을 초과하였습니다.");
 			} else
@@ -97,7 +104,7 @@ public class Bank {
 		ArrayList<Account> list = am.getList();
 		for (int i = 0; i < list.size(); i++)
 			if (list.get(i).getId().equals(id))
-				System.out.printf("[%d] %s\n", index++, list.get(i).getAccountNumber());
+				System.out.printf("[%d] %s\n", ++index, list.get(i).getAccountNumber());
 	}
 
 	private void deleteAccount() {
@@ -152,7 +159,7 @@ public class Bank {
 			if (!checkDuplId(id)) {
 				User user = new User(id, password, name);
 				um.addUser(user);
-				System.out.println("[메세지] 회원가입을 축하합니다!");				
+				System.out.println("[메세지] 회원가입을 축하합니다!");
 			} else
 				System.out.println("[메세지] 유효하지 않거나 이미 가입된 아이디 입니다.");
 		} else
@@ -193,7 +200,7 @@ public class Bank {
 		} else
 			System.out.println("[메세지] 존재하지 않는 아이디 입니다.");
 	}
-	
+
 	private void logOut() {
 		this.log = -1;
 		System.out.println("[메세지] 로그아웃이 완료되었습니다.BYE.");
@@ -214,7 +221,7 @@ public class Bank {
 			createAccount();
 		else if (sel == 5)
 			deleteAccount();
-		else if(sel == 0)
+		else if (sel == 0)
 			logOut();
 	}
 

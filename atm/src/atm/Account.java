@@ -6,13 +6,13 @@ public class Account {
 	
 	private String userId , accountNumber;
 	private int money;
-	private int accountCount;
+	private int size;
 	
 	public Account(String id, String accountNumber, int money) {
 		this.userId = id;
 		this.accountNumber = accountNumber;
 		this.money = money;
-		this.accountCount = 1;
+		this.size = 1;
 	}
 	
 	public String getId() {
@@ -31,12 +31,12 @@ public class Account {
 		this.accountNumber = accountNumber;
 	}
 	
-	public int getAccountCount() {
-		return this.accountCount;
+	public int getAccountSize() {
+		return this.size;
 	}
 	
-	public void setAccountCount(int accountCount) {
-		this.accountCount = accountCount;
+	public void setAccountSize(int accountCount) {
+		this.size = accountCount;
 	}
 	
 	

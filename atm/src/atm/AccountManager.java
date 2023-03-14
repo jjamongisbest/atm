@@ -16,8 +16,6 @@ public class AccountManager {
 	public Account getAccount(int index) {
 		Account account = list.get(index);
 
-//		public Account(String id, String accountNumber, int money) {
-
 		String id = account.getId();
 		String accountNumber = account.getAccountNumber();
 		int money = account.getMoney();
