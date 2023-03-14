@@ -4,22 +4,23 @@ public class Account {
 	
 	public static int LIMIT = 3;
 	
-	private int userCode;
-	private String accountNumber;
+	private String id , accountNumber;
 	private int money;
+	private int accountCount;
 	
-	public Account(int userCode, String accountNumber, int money) {
-		this.userCode = userCode;
+	public Account(String id, String accountNumber, int money) {
+		this.id = id;
 		this.accountNumber = accountNumber;
 		this.money = money;
+		this.accountCount = 1;
 	}
 	
-	public int getUserCode() {
-		return this.userCode;
+	public String getId() {
+		return this.id;
 	}
 	
-	public void setUserCode(int userCode) {
-		this.userCode = userCode;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String getAccountNumber() {

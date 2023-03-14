@@ -96,8 +96,9 @@ public class Bank {
 		String password = sc.next();
 		
 		if(checkDuplId(id)&&checkDuplPassword(password)) {
-			
-		}
+			um.deleteUserById(id);
+		} else
+			System.out.println("[메세지] 유호하지 않은 회원정보입니다..");
 
 	}
 
@@ -112,8 +113,8 @@ public class Bank {
 			signUp();
 		else if(sel == 3)
 			leave();
-//		else if(sel == 4)
-//			createAccount();
+		else if(sel == 4)
+			createAccount();
 //		else if(sel == 5)
 //			deleteAccount();
 //		else if(sel == 0)

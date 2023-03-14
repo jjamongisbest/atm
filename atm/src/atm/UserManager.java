@@ -17,13 +17,23 @@ public class UserManager {
 	public User getUser(int index) {
 		User user = list.get(index);
 
+		String id = user.getId();
+		String password = user.getPassword();
+		String name = user.getName();
+
 		// 사본제공
-		User reqObj = new User();
+		User reqObj = new User(id, password, name);
+		reqObj.setAcc(user.getAcc());
 		return reqObj;
 	}
 
 	public User getUser(String id) {
 		int index = -1; // 호출되는 메서드 존재 추가해야됨
+		
+		for (int i = 0; i < getList().size(); i++)
+			if (getList().get(i).getId().equals(id))
+				index = i;
+		
 		return getUser(index);
 	}
 
@@ -38,9 +48,12 @@ public class UserManager {
 	}
 
 	public void deleteUserById(String id) {
-		for (int i = 0; i < list.size(); i++) {
+		int index = -1;
+		for (int i = 0; i < getList().size(); i++)
+			if (getList().get(i).getId().equals(id))
+				index = i;
 
-		}
+		deleteUser(index);
 	}
 
 	public ArrayList<User> getList() {
