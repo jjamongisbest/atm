@@ -4,23 +4,23 @@ public class Account {
 	
 	public static int LIMIT = 3;
 	
-	private String id , accountNumber;
+	private String userId , accountNumber;
 	private int money;
 	private int accountCount;
 	
 	public Account(String id, String accountNumber, int money) {
-		this.id = id;
+		this.userId = id;
 		this.accountNumber = accountNumber;
 		this.money = money;
 		this.accountCount = 1;
 	}
 	
 	public String getId() {
-		return this.id;
+		return this.userId;
 	}
 	
 	public void setId(String id) {
-		this.id = id;
+		this.userId = id;
 	}
 	
 	public String getAccountNumber() {
@@ -29,6 +29,14 @@ public class Account {
 	
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	
+	public int getAccountCount() {
+		return this.accountCount;
+	}
+	
+	public void setAccountCount(int accountCount) {
+		this.accountCount = accountCount;
 	}
 	
 	

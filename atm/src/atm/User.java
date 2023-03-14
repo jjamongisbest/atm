@@ -43,5 +43,9 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getAccSize() {
+		return this.accs.size();
+	}
 
 }
