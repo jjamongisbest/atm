@@ -3,49 +3,49 @@ package atm;
 import java.util.ArrayList;
 
 public class User {
-	private ArrayList<Account> accs;
 	private String id, password, name;
+	
+	// new 객체가 아님 -> AccountManager.list 안에 있는 인스턴스 
+	private ArrayList<Account> accs;
 	
 	public User(String id, String password, String name) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
-	}
-
-	public ArrayList<Account> getAcc() {
-		return this.accs;
-	}
-
-	public void setAcc(ArrayList<Account> accs) {
-		this.accs = accs;
+		this.accs = new ArrayList<Account>();
 	}
 
 	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+		return id;
 	}
 
 	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+		return password;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public int getAccountSize() {
+		return this.accs.size();
 	}
 	
-	public int getAccSize() {
-		return this.accs.size();
+	public void addAccount(Account account) {
+		this.accs.add(account);
+	}
+	
+	public Account getAccount(int index) {
+		return this.accs.get(index);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s / %s [%s]", this.id, this.password, this.name);
+	}
+	
+	public ArrayList<Account> getAccountList(){
+		return (ArrayList<Account>) this.accs.clone();
 	}
 
 }

@@ -3,61 +3,75 @@ package atm;
 import java.util.ArrayList;
 
 public class UserManager {
-
-	private static ArrayList<User> list = new ArrayList<>();
-
-	// User 에 대한
-
-	// C reate
-	public void addUser(User user) {
-		list.add(user);
+	
+	private static ArrayList<User> list = new ArrayList<User>();
+	
+	
+	// Create 
+	public User addUser(User user) {
+		// 검증 후 add 
+		User check = getUserById(user.getId());
+		if(check == null) {
+			list.add(user);
+			return user;
+		}
+		return null;
 	}
-
-	// R ead
+	
+	// Read 
 	public User getUser(int index) {
 		User user = list.get(index);
-
-		String id = user.getId();
-		String password = user.getPassword();
-		String name = user.getName();
-
-		// 사본제공
-		User reqObj = new User(id, password, name);
-		reqObj.setAcc(user.getAcc());
+		
+		User reqObj = new User(user.getId(), user.getPassword(), user.getName());
 		return reqObj;
 	}
-
-	public User getUser(String id) {
-		int index = -1; 
+	
+	public User getUserById(String id) {
+		User user = null;
 		
-		for (int i = 0; i < getList().size(); i++)
-			if (getList().get(i).getId().equals(id))
-				index = i;
+		int index = indexOfById(id);
+		if(index != -1)
+			user = getUser(index);
 		
-		return getUser(index);
+		return user;
 	}
+	
+	public int indexOfById(String id) {
+		int index = -1;
+		for(User user : list) {
+			if(user.getId().equals(id))
+				index = list.indexOf(user);
+		}
+		return index;
+	}
+	
+	public User getUserByAccount(String accountNum) {
+	    User user = null;
 
-	// U pdate
+	    Account account = getAccountByNum(accountNum);
+	    if (account != null) {
+	        user = getUserById(account.getUserId());
+	    }
+
+	    return user;
+	}
+	
+	// Update
 	public void setUser(int index, User user) {
 		list.set(index, user);
 	}
-
-	// D elete
+	
+	public void setUser(User user, Account account) {
+		int index = indexOfById(user.getId());
+		
+		list.get(index).addAccount(account);
+	}
+	// Delete 
 	public void deleteUser(int index) {
 		list.remove(index);
 	}
-
+	
 	public void deleteUserById(String id) {
-		int index = -1;
-		for (int i = 0; i < getList().size(); i++)
-			if (getList().get(i).getId().equals(id))
-				index = i;
-
-		deleteUser(index);
+		// 
 	}
-
-	public ArrayList<User> getList() {
-		return list;
-	}
-
 }
